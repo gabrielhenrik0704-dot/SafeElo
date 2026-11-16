@@ -4,6 +4,46 @@ Projeto CitizenTech para Global Solution 2026 (FIAP, turma 2SIOA). Foco: idosos,
 
 **Aplicação independente:** frontend HTML/CSS/JavaScript, backend Java 17/Spring Boot, autenticação própria e banco relacional. Não requer ChatGPT, OpenAI, login de desenvolvedor ou hospedagem vinculada a esta conversa. Não há resultados pré-gravados ou contas fictícias no produto.
 
+## Visualizar sem instalar
+
+As imagens abaixo foram capturadas no sistema real em execução, durante testes com contas e mensagens fictícias. Os resultados foram calculados pelo backend Java e salvos em banco. As funções correspondentes são executadas pela aplicação.
+
+### Página inicial
+
+![Página inicial do SafeElo](docs/screenshots/inicio.png)
+
+### Resultado explicado
+
+![Resultado real da análise de uma mensagem de exercício](docs/screenshots/resultado.png)
+
+### Painel do familiar
+
+![Pedido de ajuda compartilhado e acompanhado pelo familiar](docs/screenshots/familiar.png)
+
+### No celular
+
+<img src="docs/screenshots/celular.png" alt="Tela de verificação em celular" width="390">
+
+## Baixar e abrir no navegador
+
+[**Baixar pacote completo com executável Java (.zip)**](https://github.com/gabrielhenrik0704-dot/SafeElo/raw/refs/heads/main/distribuicao/SafeElo-1.0.0-completo.zip)
+
+[Conferir SHA-256 do pacote](distribuicao/SHA256SUMS).
+
+Para visualizar o código e estas imagens, basta este repositório. Para **usar as funções interativas**, baixe e extraia o ZIP, tenha Java 17+ instalado e execute o launcher abaixo. Ele inicia um servidor local no próprio computador; não exige contratar ou publicar hospedagem na internet.
+
+No Linux/macOS:
+
+```sh
+cd SafeElo
+chmod +x scripts/run-local.sh
+./scripts/run-local.sh
+```
+
+Abra **http://localhost:8080** no navegador do mesmo computador. No Windows, siga a seção de execução PowerShell abaixo. As funções interativas precisam do processo Java local; o GitHub oferece a consulta aos arquivos e à documentação.
+
+O pacote inclui fonte, JAR compilado, migração SQL, documentação e testes; não inclui banco de teste, chaves locais ou credenciais. Quem clonar apenas o código pelo Git poderá compilar com `./mvnw package`.
+
 ## O que está implementado
 
 - Cadastro de cidadão e familiar, login, logout, recuperação de senha via SMTP e exclusão de conta.
@@ -101,7 +141,7 @@ Abra http://localhost:8080. O PostgreSQL não publica porta externamente; o app 
 docker compose -f compose.yaml -f compose.prod.yaml up --build -d
 ```
 
-Caddy termina TLS e encaminha ao Java; o perfil `prod` exige origem HTTPS e cookie seguro. Confira o certificado real antes de cadastrar dados sensíveis. A aplicação não foi publicada em um domínio externo neste trabalho porque nenhuma conta de hospedagem ou domínio foi fornecido. Não foi usada hospedagem Sites/ChatGPT.
+Caddy termina TLS e encaminha ao Java; o perfil `prod` exige origem HTTPS e cookie seguro. Confira o certificado real antes de cadastrar dados sensíveis. Para a entrega acadêmica, a execução local é suficiente. A publicação externa desta seção é opcional e não foi realizada.
 
 `Dockerfile.runtime` permite construir apenas a imagem de execução a partir do JAR já compilado: `docker build -f Dockerfile.runtime -t safeelo .`. O `Dockerfile` normal compila e testa o código em um build multi-stage.
 
