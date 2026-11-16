@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: safeelo
+      POSTGRES_USER: safeelo
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Gere a configuração com scripts/init-deploy.sh}
+    volumes:
+      - database:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U safeelo -d safeelo"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+    restart: unless-stopped
+  app:
+    build: .
+    ports: ["127.0.0.1:8080:8080"]
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/safeelo
+      DB_USER: safeelo
+      DB_PASSWORD: ${DB_PASSWORD:?Configure DB_PASSWORD}
+      SAFEELO_ENCRYPTION_KEY: ${SAFEELO_ENCRYPTION_KEY:?Configure a chave AES}
+      APP_BASE_URL: ${APP_BASE_URL:-http://localhost:8080}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_AUTH: ${SMTP_AUTH:-true}
+      SMTP_STARTTLS: ${SMTP_STARTTLS:-true}
+      MAIL_FROM: ${MAIL_FROM:-}
+    depends_on:
+      db: {condition: service_healthy}
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 768m
+    restart: unless-stopped
+volumes:
+  database:

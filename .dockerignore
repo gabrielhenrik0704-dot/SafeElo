@@ -1,0 +1,11 @@
+.git
+.local
+.env
+.env.*
+.tools
+__pycache__
+*.log
+release
+target/*
+!target/safeelo-1.0.0.jar
+tests/artifacts
