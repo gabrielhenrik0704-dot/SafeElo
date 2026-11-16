@@ -4,6 +4,13 @@ Projeto CitizenTech para Global Solution 2026 (FIAP, turma 2SIOA). Foco: idosos,
 
 **Aplicação independente:** frontend HTML/CSS/JavaScript, backend Java 17/Spring Boot, autenticação própria e banco relacional. Não requer ChatGPT, OpenAI, login de desenvolvedor ou hospedagem vinculada a esta conversa. Não há resultados pré-gravados ou contas fictícias no produto.
 
+## Documentação em Word e PDF
+
+- [Documentação completa em PDF](documentacao/Documentacao-SafeElo.pdf)
+- [Documentação editável em Word](documentacao/Documentacao-SafeElo.docx)
+
+Inclui funcionamento, requisitos, arquitetura, banco de dados, segurança, capturas, execução no Windows/Linux, testes, API e limitações.
+
 ## Slides da apresentação
 
 - [PowerPoint editável — 13 slides](apresentacao/SafeElo-apresentacao.pptx)
